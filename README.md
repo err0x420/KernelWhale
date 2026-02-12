@@ -22,6 +22,7 @@
 
 Whether you're a **Pentester** needing a quick reverse shell, a **SysAdmin** automating log rotation, or just a user wanting to organize their Downloads folder, KernelWhale bridges the gap between AI generation and local execution.
 
+<a id="features"></a>
 ## ✨ Features
 
 - **⚡ Instant Execution**: Adds a **"▶ Run"** button to every code block in DeepSeek.
@@ -31,6 +32,7 @@ Whether you're a **Pentester** needing a quick reverse shell, a **SysAdmin** aut
 - **📏 Custom UI**: Enhanced chat input with a custom **blue drag-handle** to resize your workspace exactly how you want it.
 - **🔒 Local Context**: Execute commands directly on your host machine (Linux/Kali).
 
+<a id="installation"></a>
 ## 🛠️ Installation
 
 Get up and running in seconds:
@@ -53,6 +55,7 @@ npm start
 
 - **Kali Rolling** (Primary supported environment)
 
+<a id="usage"></a>
 ## 🎮 Usage
 
 > **⚠️ Login Note**: Google Login is currently **not supported**. Please sign in using your standard **Email and Password**.
