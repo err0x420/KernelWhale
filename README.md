@@ -37,7 +37,7 @@ KernelWhale bridges the gap between AI generation and local execution. Accomplis
 - **🔑 No API Key Required**: Works directly with your DeepSeek web account—no tokens needed.
 - **🖥️ Native Terminals**: Spawns real, independent terminal windows for each execution.
 - **🔄 Session Management**: Handle multiple shell sessions simultaneously (great for multitasking).
-- **📏 Custom UI**: Enhanced chat input with a custom **blue drag-handle** to resize your workspace exactly how you want it.
+- **📏 Custom UI**: Enhanced chat input with a custom **blue drag-handle** to resize the message input area exactly how you want it.
 - **🔒 Local Context**: Execute commands directly on your host machine (Linux/Kali).
 - **🗂️ Easy History Access**: Seamlessly navigate your conversation history to revisit past solutions or commands.
 
