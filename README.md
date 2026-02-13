@@ -50,6 +50,10 @@ KernelWhale bridges the gap between AI generation and local execution. Accomplis
 - **Node.js**: Required to run the application (v16+ recommended).
 - **npm**: Generally installed with Node.js.
 
+```bash
+sudo apt install nodejs npm
+```
+
 <a id="installation"></a>
 ## 🛠️ Installation
 
