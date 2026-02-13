@@ -7,6 +7,9 @@
     Turn DeepSeek Chat into your local command center.<br>
     Execute generated code directly on your machine with a single click.
   </p>
+  <p>
+    <strong>100% Free and Unlimited</strong>
+  </p>
 
   <p>
     <a href="#features">Features</a> •
@@ -21,7 +24,11 @@
 
 **KernelWhale** is an Electron-based wrapper for DeepSeek Chat designed for power users. It doesn't just display code—it runs it. 
 
-Whether you're a **Pentester** needing a quick reverse shell, a **SysAdmin** automating log rotation, or just a user wanting to organize their Downloads folder, KernelWhale bridges the gap between AI generation and local execution.
+KernelWhale bridges the gap between AI generation and local execution. Accomplish complex tasks in just a few clicks, with the ability to consult the AI for doubts and adjustments on the fly.
+
+- **SysAdmin**: Need help **deploying Docker and configuring system services**? or automating log rotation? Do it all without leaving the chat.
+- **Pentester**: Launch a reverse shell or run analysis scripts instantly.
+- **User**: Organize your Downloads folder or manage your system files.
 
 <a id="features"></a>
 ## ✨ Features
@@ -32,6 +39,7 @@ Whether you're a **Pentester** needing a quick reverse shell, a **SysAdmin** aut
 - **🔄 Session Management**: Handle multiple shell sessions simultaneously (great for multitasking).
 - **📏 Custom UI**: Enhanced chat input with a custom **blue drag-handle** to resize your workspace exactly how you want it.
 - **🔒 Local Context**: Execute commands directly on your host machine (Linux/Kali).
+- **🗂️ Easy History Access**: Seamlessly navigate your conversation history to revisit past solutions or commands.
 
 ## 🖥️ Tested on
 
@@ -73,6 +81,13 @@ npm start
 3. **Click Run**: Hit the **▶ Run** button injected into the code block.
 4. **Execute**: A terminal window opens and runs your command instantly.
 5. **Resize**: Drag the **blue line** above the chat input to expand your typing area.
+
+## 📝 Roadmap
+
+- [ ] Add support for Windows 10 & 11
+- [ ] Add support for other Linux distributions
+- [ ] Fix Google OAuth Login
+- [ ] Implement In-App Search
 
 ## ⚠️ Disclaimer
 
