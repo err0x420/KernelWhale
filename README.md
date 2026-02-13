@@ -4,7 +4,8 @@
     <strong>DeepSeek PWA on Steroids for SysAdmins & Pentesters</strong>
   </p>
   <p>
-    Turn DeepSeek Chat into your local command center. Execute generated code directly on your machine with a single click.
+    Turn DeepSeek Chat into your local command center.<br>
+    Execute generated code directly on your machine with a single click.
   </p>
 
   <p>
