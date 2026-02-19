@@ -52,7 +52,7 @@ KernelWhale bridges the gap between AI generation and local execution. Accomplis
 - **npm**: Generally installed with Node.js.
 
 ```bash
-sudo apt install nodejs npm
+sudo apt update && sudo apt install nodejs npm -y
 ```
 
 <a id="installation"></a>
