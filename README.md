@@ -8,7 +8,8 @@
     Execute generated code directly on your machine with a single click.
   </p>
   <p>
-    <strong>100% Free and Unlimited</strong>
+    This tool is 100% free to use.<br>
+    Requires a valid DeepSeek account.
   </p>
 
   <p>
