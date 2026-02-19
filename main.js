@@ -399,6 +399,16 @@ ipcMain.handle('get-terminal-buffer', (event, sessionId) => {
   return null;
 });
 
+ipcMain.on('update-window-title', (event, title) => {
+  if (mainWindow && !mainWindow.isDestroyed()) {
+    if (title) {
+      mainWindow.setTitle(`KernelWhale - ${title}`);
+    } else {
+      mainWindow.setTitle('KernelWhale');
+    }
+  }
+});
+
 ipcMain.on('forward-to-chat', (event, data) => {
   if (mainWindow && !mainWindow.isDestroyed()) {
     mainWindow.webContents.send('insert-chat-text', data);
@@ -421,7 +431,7 @@ function createWindow() {
     height: 800,
     minWidth: 800,
     minHeight: 600,
-    title: 'DeepSeek Chat',
+    title: 'KernelWhale',
     icon: path.join(__dirname, 'assets', 'icon.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -435,6 +445,11 @@ function createWindow() {
     },
     autoHideMenuBar: true,
     show: false
+  });
+
+  // Force the title to stay as 'KernelWhale'
+  mainWindow.on('page-title-updated', (e) => {
+    e.preventDefault();
   });
 
   // Context menu for copy/paste
@@ -793,9 +808,52 @@ function injectCodeExecutionUI(webContents) {
         }, 300);
       };
       
-      // Watch for new content
+      // Window Title Management
+      let lastSentTitle = null;
+      function updateWindowTitle() {
+        const currentPath = window.location.pathname;
+        let title = null;
+        
+        // Strategy: Match current URL with sidebar links
+        if (currentPath.includes('/chat/s/')) {
+          // Try to find the link that matches the current URL
+          const links = document.querySelectorAll('a._546d736');
+          for (const link of links) {
+            const href = link.getAttribute('href');
+            if (href && currentPath.endsWith(href)) {
+              const titleEl = link.querySelector('.c08e6e93');
+              if (titleEl) {
+                title = titleEl.textContent.trim();
+                break;
+              }
+            }
+          }
+          
+          // Fallback: look for the "active" class b64fb9ae mentioned by user
+          if (!title) {
+            const activeLink = document.querySelector('a._546d736.b64fb9ae');
+            if (activeLink) {
+              const titleEl = activeLink.querySelector('.c08e6e93');
+              if (titleEl) title = titleEl.textContent.trim();
+            }
+          }
+        }
+        
+        if (title !== lastSentTitle) {
+          lastSentTitle = title;
+          if (window.__updateTitle) window.__updateTitle(title);
+        }
+      }
+
+      // Initial check
+      setTimeout(updateWindowTitle, 2000);
+
+      // Watch for changes (sidebar updates, navigation, etc)
       const observer = new MutationObserver((mutations) => {
-        // Check if any mutation added nodes that might contain code blocks
+        // Update title if needed
+        updateWindowTitle();
+
+        // Check for code blocks
         const hasRelevantMutations = mutations.some(mutation => {
           if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
             return Array.from(mutation.addedNodes).some(node => {

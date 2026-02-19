@@ -20,6 +20,11 @@ contextBridge.exposeInMainWorld('__executeCodeAndShowModal', async (code, langua
   return result;
 });
 
+// Expose function to update window title
+contextBridge.exposeInMainWorld('__updateTitle', (title) => {
+  ipcRenderer.send('update-window-title', title);
+});
+
 // Also expose electronAPI for compatibility
 contextBridge.exposeInMainWorld('electronAPI', {
   executeCode: (code, language, sessionId) => ipcRenderer.invoke('execute-code', code, language, sessionId),

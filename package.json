@@ -1,5 +1,5 @@
 {
-  "name": "deepseek-chat",
+  "name": "kernel-whale",
   "version": "1.0.0",
   "description": "DeepSeek Chat PWA wrapper using Electron",
   "main": "main.js",
