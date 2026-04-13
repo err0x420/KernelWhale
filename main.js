@@ -8,7 +8,10 @@ let mainWindow;
 const terminals = new Map();
 let nextTerminalId = 1;
 
-const CHROME_USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+const isWindows = process.platform === 'win32';
+const CHROME_USER_AGENT = isWindows 
+  ? 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+  : 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
 const LANGUAGE_COMMANDS = {
   'bash': { cmd: 'bash', args: ['-c'] },
@@ -63,6 +66,12 @@ ipcMain.handle('execute-code', async (event, code, language, sessionId) => {
     if (isWindows) {
       if (lang === 'python' || lang === 'python3' || lang === 'py') {
         langConfig.cmd = 'python';
+      } else if (['shell', 'bash', 'sh', 'zsh', 'powershell', 'ps1'].includes(lang)) {
+        // Force native PowerShell on Windows for all shell-related types (avoiding WSL)
+        langConfig = { 
+          cmd: 'powershell.exe', 
+          args: ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-Command'] 
+        };
       }
     } else {
       if (lang === 'powershell' || lang === 'ps1') {
@@ -88,7 +97,8 @@ ipcMain.handle('execute-code', async (event, code, language, sessionId) => {
       const activeProcess = spawn(spawnCmd, spawnArgs, {
         cwd: os.homedir(),
         shell: isWindows,
-        env: { ...process.env, TERM: 'xterm-256color' }
+        env: { ...process.env, TERM: 'xterm-256color' },
+        windowsHide: true
       });
 
       termData.activeProcess = activeProcess;
@@ -139,7 +149,7 @@ ipcMain.handle('show-execution-modal', async (event, result, language, code) => 
     minWidth: 400,
     minHeight: 300,
     title: `Terminal Output - ${language}`,
-    icon: path.join(__dirname, 'assets', 'icon.png'),
+    icon: path.join(__dirname, 'assets', isWindows ? 'icon.ico' : 'icon.png'),
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -154,7 +164,7 @@ ipcMain.handle('show-execution-modal', async (event, result, language, code) => 
   terminals.set(sessionId, {
     window: terminalWindow,
     activeProcess: null,
-    buffer: `\x1B[1;36m└─$ ${code}\x1B[0m\r\n`,
+    buffer: `\x1B[1;36m${isWindows ? 'PS> ' : '└─$ '}${code}\x1B[0m\r\n`,
     isExecutionComplete: false,
     lastExecutionResult: null,
     wasInterrupted: false
@@ -285,6 +295,7 @@ ipcMain.handle('show-execution-modal', async (event, result, language, code) => 
             // empty lines, or system/noisy messages.
             return trimmed && 
                    !trimmed.startsWith('└─$') && 
+                   !trimmed.startsWith('PS> ') && 
                    !/^(Script done|Session terminated)/i.test(trimmed);
           });
 
@@ -432,7 +443,7 @@ function createWindow() {
     minWidth: 800,
     minHeight: 600,
     title: 'KernelWhale',
-    icon: path.join(__dirname, 'assets', 'icon.png'),
+    icon: path.join(__dirname, 'assets', isWindows ? 'icon.ico' : 'icon.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
@@ -892,7 +903,8 @@ function injectCodeExecutionUI(webContents) {
           }
           
           if (input) {
-            const commandText = "└─$ " + (data.command || "").trim();
+            const prompt = ${isWindows ? '"PS> "' : '"└─$ "'};
+            const commandText = prompt + (data.command || "").trim();
             const outputText = (data.output || "").trim();
             const formattedText = "\\n" + commandText + "\\n" + outputText + "\\n";
             

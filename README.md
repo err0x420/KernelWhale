@@ -45,15 +45,22 @@ KernelWhale bridges the gap between AI generation and local execution. Accomplis
 ## 🖥️ Tested on
 
 - **Kali Rolling** (Primary supported environment)
+- **Windows 11 / 10** (WSL or Git Bash recommended for full shell compatibility)
 
 ## 📋 Prerequisites
 
 - **Node.js**: Required to run the application (v16+ recommended).
 - **npm**: Generally installed with Node.js.
 
+### Linux (Kali/Debian)
 ```bash
-sudo apt update && sudo apt install nodejs npm -y
+sudo apt update -y && sudo apt install nodejs npm -y
 ```
+
+### Windows
+- **Node.js**: Download from [nodejs.org](https://nodejs.org/).
+- **Native Support**: Executions use **PowerShell** or **CMD** natively. 
+- **Note**: To avoid WSL dependencies, Linux-style blocks (bash, sh, zsh) are automatically mapped to **native PowerShell** on Windows.
 
 <a id="installation"></a>
 ## 🛠️ Installation
@@ -89,7 +96,7 @@ npm start
 
 ## 📝 Roadmap
 
-- [ ] Add support for Windows 10 & 11
+- [x] Add support for Windows 11
 - [ ] Add support for other Linux distributions
 - [ ] Fix Google OAuth Login
 - [ ] Implement In-App Search
