@@ -358,7 +358,11 @@ ipcMain.handle('show-execution-modal', async (event, result, language, code) => 
   terminalWindow.on('closed', () => {
     const termData = terminals.get(sessionId);
     if (termData && termData.activeProcess) {
-      termData.activeProcess.kill('SIGTERM');
+      if (isWindows) {
+        require('child_process').exec(`taskkill /F /T /PID ${termData.activeProcess.pid}`);
+      } else {
+        termData.activeProcess.kill('SIGTERM');
+      }
     }
     terminals.delete(sessionId);
   });
@@ -378,15 +382,20 @@ ipcMain.on('kill-execution', (event, sessionId) => {
   const termData = terminals.get(sessionId);
   if (termData && termData.activeProcess) {
     termData.wasInterrupted = true;
-    if (termData.activeProcess.stdin && termData.activeProcess.stdin.writable) {
-      termData.activeProcess.stdin.write('\x03');
-    } else {
-      termData.activeProcess.kill('SIGINT');
-    }
     const p = termData.activeProcess;
-    setTimeout(() => {
-      try { if (p && !p.killed) p.kill('SIGKILL'); } catch (e) { }
-    }, 3000);
+    
+    if (isWindows) {
+      require('child_process').exec(`taskkill /F /T /PID ${p.pid}`);
+    } else {
+      if (p.stdin && p.stdin.writable) {
+        p.stdin.write('\x03');
+      } else {
+        p.kill('SIGINT');
+      }
+      setTimeout(() => {
+        try { if (p && !p.killed) p.kill('SIGKILL'); } catch (e) { }
+      }, 3000);
+    }
   }
 });
 
