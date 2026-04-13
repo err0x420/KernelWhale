@@ -45,7 +45,7 @@ KernelWhale bridges the gap between AI generation and local execution. Accomplis
 ## 🖥️ Tested on
 
 - **Kali Rolling** (Primary supported environment)
-- **Windows 11 / 10** (WSL or Git Bash recommended for full shell compatibility)
+- **Windows 11** (With Node.js pre-installed)
 
 ## 📋 Prerequisites
 
