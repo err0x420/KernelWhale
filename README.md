@@ -97,6 +97,7 @@ npm start
 ## 📝 Roadmap
 
 - [x] Add support for Windows 11
+- [ ] Add ability to edit code before execution
 - [ ] Add support for other Linux distributions
 - [ ] Fix Google OAuth Login
 - [ ] Implement In-App Search
