@@ -1,6 +1,6 @@
 {
   "name": "kernel-whale",
-  "version": "1.0.0",
+  "version": "2026.8.11",
   "description": "DeepSeek Chat PWA wrapper using Electron",
   "main": "main.js",
   "scripts": {
@@ -12,9 +12,12 @@
   },
   "author": "",
   "license": "MIT",
+  "allowScripts": {
+    "electron": true
+  },
   "devDependencies": {
-    "electron": "^28.0.0",
-    "electron-builder": "^24.9.1"
+    "electron": "^43.3.0",
+    "electron-builder": "^26.15.3"
   },
   "build": {
     "appId": "com.deepseek.chat",
