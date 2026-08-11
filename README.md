@@ -59,11 +59,11 @@ sudo apt update -y && sudo apt install nodejs npm -y
 
 ### Windows
 - **Node.js**: Download from [nodejs.org](https://nodejs.org/).
-- **Native Support**: Executions use **PowerShell** or **CMD** natively. 
+- **Native Support**: Executions use **PowerShell** natively.
 - **Note**: To avoid WSL dependencies, Linux-style blocks (bash, sh, zsh) are automatically mapped to **native PowerShell** on Windows.
 
 <a id="installation"></a>
-## 🛠️ Installation
+## 🛠️ Installation (Kali & Windows PowerShell)
 
 Get up and running in seconds:
 
@@ -80,6 +80,14 @@ npm install
 # Launch KernelWhale
 npm start
 ```
+
+**💡 Windows PowerShell note**: If `npm install` fails with *"npm.ps1 cannot be loaded because running scripts is disabled on this system"*, open a **PowerShell as Administrator** and run:
+
+```powershell
+Set-ExecutionPolicy Unrestricted
+```
+
+Answer **Y** when prompted, then close the terminal and run `npm install` again.
 
 <a id="usage"></a>
 ## 🎮 Usage
