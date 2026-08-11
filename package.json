@@ -11,7 +11,7 @@
     "build:all": "electron-builder --linux --win"
   },
   "author": "",
-  "license": "MIT",
+  "license": "PolyForm-Noncommercial-1.0.0",
   "allowScripts": {
     "electron": true
   },
@@ -20,8 +20,8 @@
     "electron-builder": "^26.15.3"
   },
   "build": {
-    "appId": "com.deepseek.chat",
-    "productName": "DeepSeek Chat",
+    "appId": "com.kernelwhale.app",
+    "productName": "KernelWhale",
     "directories": {
       "output": "dist"
     },
