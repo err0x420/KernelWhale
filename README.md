@@ -17,7 +17,7 @@
     <a href="#features">Features</a> •
     <a href="#installation">Installation</a> •
     <a href="#usage">Usage</a> •
-    <a href="#uninstall">Uninstall</a>
+    <a href="#uninstall-linux">Uninstall</a>
   </p>
 </div>
 
@@ -104,7 +104,43 @@ Answer **Y** when prompted, then close the terminal and run `npm install` again.
 4. **Execute**: A terminal window opens and runs your command instantly.
 5. **Resize**: Drag the **blue line** above the chat input to expand your typing area.
 
-<a id="uninstall"></a>
+<a id="uninstall-linux"></a>
+## 🗑️ Uninstall (Kali Linux)
+
+1. **Close KernelWhale**.
+
+2. **(Optional)** Only if you used one of the installers (the `.deb` package or the AppImage) — otherwise you can skip this step:
+   - **`.deb` package** → remove it with `dpkg` (commands below).
+   - **AppImage version** → there is no uninstall entry; simply delete the `.AppImage` file.
+   - **Running from source** (`npm install` / `npm start`) → there is no installed app; just delete the project folder.
+
+   If you installed the `.deb`, run:
+
+   ```bash
+   # Find this app's package (kernel-whale only — the real Kali kernel packages are NOT matched)
+   dpkg -l | grep kernel-whale
+
+   # Remove the package
+   sudo dpkg -r kernel-whale
+
+   # Clean up leftover system files (app folder, /usr/bin symlink, menu entry)
+   sudo rm -rf /opt/KernelWhale
+   sudo find /usr/bin -maxdepth 1 -iname "*kernelwhale*" -delete
+   sudo find /usr/share/applications -iname "*kernelwhale*" -delete
+   ```
+
+3. **Remove leftover data and cache** (required in all cases — user data is kept on purpose). Run:
+
+   ```bash
+   # App data (installed app) and leftover dev profile, just in case
+   rm -rf ~/.config/KernelWhale
+   rm -rf ~/.config/kernel-whale
+
+   # Residual temporary execution scripts (if any remain)
+   rm -f /tmp/whale_exec_*
+   ```
+
+<a id="uninstall-win"></a>
 ## 🗑️ Uninstall (Windows 11)
 
 1. **Close KernelWhale** (also check the system tray, bottom-right corner).
