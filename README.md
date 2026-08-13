@@ -108,8 +108,10 @@ Answer **Y** when prompted, then close the terminal and run `npm install` again.
 ## 🗑️ Uninstall (Windows 11)
 
 1. **Close KernelWhale** (also check the system tray, bottom-right corner).
-2. **Uninstall the app**: `Settings → Apps → Installed apps → KernelWhale → Uninstall`.
-3. **Remove leftover data and cache** (the uninstaller intentionally keeps user data). Open a normal PowerShell (no admin needed) and run:
+2. **Uninstall the app**, depending on the version you used:
+   - **Setup version** (`KernelWhale_Setup.exe`) → `Settings → Apps → Installed apps → KernelWhale → Uninstall`.
+   - **Portable version** (`KernelWhale_Portable.exe`) → there is no uninstall entry; simply delete the `.exe` file.
+3. **Remove leftover data and cache** (required in both cases — the uninstaller intentionally keeps user data). Open a normal PowerShell (no admin needed) and run:
 
 ```powershell
 # App data (installed app) and leftover dev profile, just in case

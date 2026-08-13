@@ -42,7 +42,11 @@
     },
     "nsis": {
       "oneClick": false,
-      "allowToChangeInstallationDirectory": true
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "KernelWhale_Setup.${ext}"
+    },
+    "portable": {
+      "artifactName": "KernelWhale_Portable.${ext}"
     }
   },
   "dependencies": {
