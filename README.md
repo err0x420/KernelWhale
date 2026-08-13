@@ -16,7 +16,8 @@
   <p>
     <a href="#features">Features</a> •
     <a href="#installation">Installation</a> •
-    <a href="#usage">Usage</a>
+    <a href="#usage">Usage</a> •
+    <a href="#uninstall">Uninstall</a>
   </p>
 </div>
 
@@ -102,6 +103,28 @@ Answer **Y** when prompted, then close the terminal and run `npm install` again.
 3. **Click Run**: Hit the **▶ Run** button injected into the code block.
 4. **Execute**: A terminal window opens and runs your command instantly.
 5. **Resize**: Drag the **blue line** above the chat input to expand your typing area.
+
+<a id="uninstall"></a>
+## 🗑️ Uninstall (Windows 11)
+
+1. **Close KernelWhale** (also check the system tray, bottom-right corner).
+2. **Uninstall the app**: `Settings → Apps → Installed apps → KernelWhale → Uninstall`.
+3. **Remove leftover data and cache** (the uninstaller intentionally keeps user data). Open a normal PowerShell (no admin needed) and run:
+
+```powershell
+# App data (installed app) and leftover dev profile, just in case
+Remove-Item "$env:APPDATA\KernelWhale"     -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item "$env:APPDATA\kernel-whale"    -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item "$env:LOCALAPPDATA\KernelWhale"    -Recurse -Force -ErrorAction SilentlyContinue
+
+# Shortcuts if any remain
+Remove-Item "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\KernelWhale" -Recurse -Force -ErrorAction SilentlyContinue
+
+# Residual temporary execution scripts (if any remain)
+Remove-Item "$env:TEMP\whale_exec_*" -Force -ErrorAction SilentlyContinue
+```
+
+**💡 Note**: `-ErrorAction SilentlyContinue` keeps the commands silent if a folder doesn't exist — it's normal for some of them to be missing. KernelWhale doesn't install services, drivers, or system-wide entries, so nothing else needs to be removed.
 
 ## 📝 Roadmap
 
