@@ -337,7 +337,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1200, height: 800, minWidth: 800, minHeight: 600,
     title: 'KernelWhale', icon: path.join(__dirname, 'assets', isWindows ? 'icon.ico' : 'icon.png'),
-    webPreferences: { preload: path.join(__dirname, 'preload.js'), nodeIntegration: false, contextIsolation: true, sandbox: false, webSecurity: true, allowRunningInsecureContent: false, partition: 'persist:deepseek', spellcheck: true },
+    webPreferences: { preload: path.join(__dirname, 'preload.js'), nodeIntegration: false, contextIsolation: true, sandbox: false, webSecurity: true, allowRunningInsecureContent: false, partition: 'persist:kernelwhale', spellcheck: true },
     autoHideMenuBar: true, show: false
   });
 
@@ -368,7 +368,7 @@ function createWindow() {
   mainWindow.webContents.on('did-navigate-in-page', () => setTimeout(() => injectCodeExecutionUI(mainWindow.webContents), 1000));
   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
     if (url.includes('accounts.google.com') || url.includes('deepseek.com') || url.includes('google.com/o/oauth')) {
-      return { action: 'allow', overrideBrowserWindowOptions: { width: 500, height: 700, webPreferences: { nodeIntegration: false, contextIsolation: true, sandbox: false, partition: 'persist:deepseek' } } };
+      return { action: 'allow', overrideBrowserWindowOptions: { width: 500, height: 700, webPreferences: { nodeIntegration: false, contextIsolation: true, sandbox: false, partition: 'persist:kernelwhale' } } };
     }
     shell.openExternal(url);
     return { action: 'deny' };
@@ -398,7 +398,7 @@ function injectCodeExecutionUI(webContents) {
 }
 
 app.on('ready', () => {
-  const ses = session.fromPartition('persist:deepseek'); ses.setUserAgent(CHROME_USER_AGENT);
+  const ses = session.fromPartition('persist:kernelwhale'); ses.setUserAgent(CHROME_USER_AGENT);
   ses.webRequest.onBeforeSendHeaders((details, callback) => {
     details.requestHeaders['User-Agent'] = CHROME_USER_AGENT;
     delete details.requestHeaders['sec-ch-ua']; delete details.requestHeaders['sec-ch-ua-mobile']; delete details.requestHeaders['sec-ch-ua-platform'];

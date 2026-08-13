@@ -1,7 +1,7 @@
 {
   "name": "kernel-whale",
-  "version": "2026.8.11",
-  "description": "DeepSeek Chat PWA wrapper using Electron",
+  "version": "2026.8.13",
+  "description": "KernelWhale: Electron PWA wrapper for local command execution",
   "main": "main.js",
   "scripts": {
     "start": "electron .",

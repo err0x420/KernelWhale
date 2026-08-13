@@ -35,4 +35,4 @@ contextBridge.exposeInMainWorld('electronAPI', {
   }
 });
 
-console.log('DeepSeek PWA: Preload script loaded');
+console.log('KernelWhale: Preload script loaded');

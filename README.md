@@ -138,7 +138,7 @@ Remove-Item "$env:TEMP\whale_exec_*" -Force -ErrorAction SilentlyContinue
 
 ## 🔧 For Developers
 
-- **Versioning**: This project uses ISO-8601 date versioning (e.g. `2026.8.11`) instead of classic semver.
+- **Versioning**: This project uses ISO-8601 date versioning (e.g. `2026.8.13`) instead of classic semver.
 - **`allowScripts`** (in `package.json`): pre-approves Electron's `postinstall` script (it downloads the binary) for npm ≥ 11.10 / npm 12, where dependency install scripts are blocked by default. It is name-only (`true`) so future Electron upgrades keep working. Older npm versions silently ignore this field.
 - **`.npmrc`**: `loglevel=error` keeps `npm install` output clean for new users. It hides cosmetic deprecation warnings from `electron-builder`'s internal dependency chain (`glob@7`, `inflight`, `boolean`, `rimraf` — all unfixable upstream). The security audit summary still prints. To see all warnings, run `npm install --loglevel=warn`.
 
